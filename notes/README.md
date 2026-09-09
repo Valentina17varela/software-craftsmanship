@@ -1,5 +1,11 @@
-# 📒 Study Notes
+# Notes
 
-This folder contains my personal notes from books, courses, and other learning resources.
+Personal technical reference — structured by topic, no course backing.
 
-To keep things clean and consistent, I use a custom [template](./_template.md) whenever I start a new resource. It helps me stay organized and makes it easier to revisit later.
+**Rule:** if it comes from a course → `../courses/`. If you learned it solving a problem or reading docs → here.
+
+## Topics
+
+- [algorithms/](algorithms/) — sorting, searching, complexity
+- [data-structures/](data-structures/) — trees, graphs, hash maps, etc.
+- [patterns/](patterns/) — SOLID, design patterns, architecture

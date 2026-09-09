@@ -1,5 +1,10 @@
-# Courses and certifications 🚀
+# Courses
 
-I use this repository as a central archive where I compile all the courses I've completed, along with the projects associated with each and their certifications. 
+Structured study — each folder corresponds to a course or reference book.
 
-Here you will find a variety of topics, from web development to data science, reflecting my journey of learning and professional growth.
+| Folder | Course | Source | Status |
+|---|---|---|---|
+| `dsa/` | Data Structures & Algorithms | University of Helsinki | 🚧 In progress |
+| `clean-code/` | Writing Clean Code: 20 Code Smells | Packt / Coursera | ✅ Complete |
+| `backend-apis/` | Back End Development and APIs | freeCodeCamp | ✅ Complete |
+| `responsive-web/` | Responsive Web Design | freeCodeCamp | ✅ Complete |

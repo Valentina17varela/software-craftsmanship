@@ -48,7 +48,7 @@ How to identify and refactor 20 common code smells that degrade software quality
 </table>
 
 <p align="center">
-  <img src="../../multimedia/desing_principles.png" alt="design_principles" width="800"/>
+  <img src="./assets/desing_principles.png" alt="design_principles" width="800"/>
 </p>
 
 <br>
@@ -70,7 +70,7 @@ How to identify and refactor 20 common code smells that degrade software quality
 Deep modules have a large amount of functionality exposed through a relatively simple interface. They are easier to work with, maintain, and add more functionality than complexity to the code.
 
 <p align="center">
-  <img src="../../multimedia/deep_module.png" alt="design_principles" width="400"/>
+  <img src="./assets/deep_module.png" alt="design_principles" width="400"/>
 </p>
 
 <br>
@@ -80,7 +80,7 @@ Deep modules have a large amount of functionality exposed through a relatively s
 **Single Responsibility Principle (SRP)**: An entity should have only one reason to change. This makes the code easier to maintain, extend, and understand. It avoids high coupling between responsibilities.
 
 <p align="center">
-  <img src="../../multimedia/srp.png" alt="srp" width="400"/>
+  <img src="./assets/srp.png" alt="srp" width="400"/>
 </p>
 
 ```python
@@ -104,7 +104,7 @@ class InvoiceManager:
 **Open/Closed Principle (OCP)**: Entities should be open for extension but closed for modification. It allows you to add functionality by writing new code instead of modifying existing code.
 
 <p align="center">
-  <img src="../../multimedia/ocp.png" alt="ocp" width="400"/>
+  <img src="./assets/ocp.png" alt="ocp" width="400"/>
 </p>
 
 ```python
@@ -132,7 +132,7 @@ class HttpStore(IDataStore):
 **Liskov Substitution Principle (LSP)**: Objects of a subtype must be replaceable by objects of their supertype without breaking the application.
 
 <p align="center">
-  <img src="../../multimedia/lsp.png" alt="lsp" width="400"/>
+  <img src="./assets/lsp.png" alt="lsp" width="400"/>
 </p>
 
 ```python
@@ -160,7 +160,7 @@ class Dog(Animal):
 **Interface Segregation Principle (ISP)**: No code should depend on methods it does not use. It is recommended to divide large interfaces into smaller ones so that classes implement only the methods they really need.
 
 <p align="center">
-  <img src="../../multimedia/isp.png" alt="isp" width="600"/>
+  <img src="./assets/isp.png" alt="isp" width="600"/>
 </p>
 
 ```python
@@ -193,7 +193,7 @@ class Robot(IWorkable):
 **Dependency Inversion Principle (DIP)**: High-level modules should not depend on low-level modules; both should depend on abstractions. Allows greater flexibility and ease in changing implementations without affecting high-level modules.
 
 <p align="center">
-  <img src="../../multimedia/dip.png" alt="dip" width="400"/>
+  <img src="./assets/dip.png" alt="dip" width="400"/>
 </p>
 
 ```python

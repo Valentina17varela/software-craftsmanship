@@ -1,14 +1,70 @@
-# Zero to backend HERO!
+# 🛠️ Software Craftsmanship
 
-Welcome to my personal journey to mastering backend engineering and algorithms. This helps me track progress, stay accountable, and give back by sharing what I learn along the way.
+> *"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."* — Martin Fowler
 
-This repository is a living archive of everything I'm learning and practicing to grow as a backend engineer. It includes:
+Personal knowledge base for software engineering — courses, reference notes, coding challenges, and reusable prompts.
 
-- 📚 Notes on computer science fundamentals, system design, software architecture, clean code and SOLID
-- 💡 Data structures and algorithms solved and explained
-- 🧪 Testing, code quality and backend patterns in action
-- 🛠️ Mini backend projects to apply key concepts
+---
 
-<p align="center">
-  <img src="multimedia/coolStuff.png" alt="Mi cat Timón" width="200"/>
+## 📂 Structure
+
+```
+software-craftsmanship/
+├── 📚 courses/          structured study from courses & books
+├── 🧠 notes/            personal technical reference
+├── ⚔️  challenges/       solved coding exercises
+├── 💬 prompts/          reusable AI prompts
+└── 🏅 certifications/   earned certifications
+```
+
+---
+
+## 📚 Courses
+
+| Course | Source | Status |
+|---|---|---|
+| [Data Structures & Algorithms](./courses/dsa/) | University of Helsinki | 🚧 In progress |
+| [Writing Clean Code: 20 Code Smells](./courses/clean-code/) | Packt / Coursera | ✅ Complete |
+| [Back End Development and APIs](./courses/backend-apis/) | freeCodeCamp | ✅ Complete |
+| [Responsive Web Design](./courses/responsive-web/) | freeCodeCamp | ✅ Complete |
+
+---
+
+## 🧠 Notes
+
+Self-structured reference on CS fundamentals — built from problem-solving, docs, and work experience.
+
+- [`algorithms/`](./notes/algorithms/) — sorting, searching, complexity
+- [`data-structures/`](./notes/data-structures/) — trees, graphs, hash maps
+- [`patterns/`](./notes/patterns/) — SOLID, design patterns, architecture
+
+---
+
+## ⚔️ Challenges
+
+Solved exercises in Python and JavaScript — algorithmic problems, string manipulation, data processing.
+
+→ [`challenges/`](./challenges/)
+
+---
+
+## 🏅 Certifications
+
+<p>
+  <img src="./certifications/javascriptAlgorithms.PNG" width="280"/>
+  <img src="./certifications/backendApis.PNG" width="280"/>
+  <img src="./certifications/responsiveWebDesign.PNG" width="280"/>
+  <img src="./certifications/goSpecialization.PNG" width="280"/>
+  <img src="./certifications/metaSpecialization.PNG" width="280"/>
+  <img src="./certifications/EnglishLevel.PNG" width="280"/>
 </p>
+
+---
+
+## 🛠️ Tech
+
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)

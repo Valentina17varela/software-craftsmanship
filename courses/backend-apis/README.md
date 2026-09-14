@@ -14,7 +14,7 @@
 ### 1. Timestamp Microservice
 Full stack JavaScript app for a Timestamping Service that can interpret and generate timestamps in specific formats.
 
-[Solution](./timestamp-service) · ![preview](./multimedia/Captura%20de%20pantalla%202024-01-04%20a%20la(s)%2011.51.28%E2%80%AFp.m..png)
+[Solution](./timestamp-service) · ![preview](./multimedia/Captura%20de%20pantalla%202024-01-04%20a%20la%28s%29%2011.51.28%E2%80%AFp.m..png)
 
 ### 2. Request Header Parser Microservice
 Parse service for a request header — returns ip, language, and software from the request.

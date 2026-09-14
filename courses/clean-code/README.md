@@ -8,7 +8,7 @@
 
 ## 📝 Overview
 
-How to identify and refactor 20 common code smells that degrade software quality. You'll learn foundational SOLID principles, then tackle key issues through practical examples and refactoring techniques, you'll improve code readability, reduce technical debt, enhance encapsulation, and transform complex code into maintainable, scalable solutions.
+My focus in this course was learning to identify and refactor 20 common code smells that degrade software quality. I used the SOLID principles and the practical refactorings as a way to think more clearly about readability, technical debt, encapsulation, and maintainable design.
 
 ## 📚 Notes
 
@@ -101,7 +101,7 @@ class InvoiceManager:
     def generate_invoice(self): pass
 ```
 
-**Open/Closed Principle (OCP)**: Entities should be open for extension but closed for modification. It allows you to add functionality by writing new code instead of modifying existing code.
+**Open/Closed Principle (OCP)**: Entities should be open for extension but closed for modification. I read this as a reminder to add functionality through new code instead of repeatedly modifying stable behavior.
 
 <p align="center">
   <img src="./assets/ocp.png" alt="ocp" width="400"/>
@@ -213,7 +213,7 @@ class DataDisplay:
     def display(self):
         data = self.data_store.read('data.txt')
 
-# You can inject FileStore or HttpStore.
+# FileStore and HttpStore are both injectable implementations.
 display = DataDisplay(FileStore())
 display = DataDisplay(HttpStore())
 ```
@@ -224,13 +224,13 @@ display = DataDisplay(HttpStore())
 
 **1. Loops**
 
-Why it's bad:
+Why I flag it:
 - Loops obscure logic by requiring explicit coding of iteration logic
 - They make code more verbose than necessary
 
-How to fix it:
-- Use pipeline structures (.map(), .filter(), .reduce()) instead of hard-coded loops
-- Pipeline structures abstract iteration logic and allow you to focus on how elements are filtered, mapped, or reduced
+What I try instead:
+- I prefer pipeline structures (`map`, `filter`, and `reduce`) over hard-coded loops
+- Pipeline structures abstract iteration logic so I can focus on how elements are filtered, mapped, or reduced
 
 ```ts
 // ❌
@@ -245,12 +245,12 @@ const doubled = numbers.map(n => n * 2);
 
 **2. Uninformative Comments**
 
-Why it's bad:
+Why I flag it:
 
 - Non-informative comments make code more polluted and difficult to read.
 - They are often used to try to clarify unclear code resulting from other code smells.
 
-How to fix it:
+What I try instead:
 
 - First, make sure other smells are already resolved.
 - Once the code is clean, remove any comments that duplicate information in the code.
@@ -270,13 +270,13 @@ if( customer.is_premium && customer.purchases > 5 ) {
 
 **3. Shotgun Surgery**
 
-Why it's bad:
+Why I flag it:
 
 - It reduces code maintainability by requiring multiple changes for a single change.
 - It's easy to forget to change one part of the code, introducing bugs.
 - It's often the result of poor encapsulation or modularity.
 
-How to fix it:
+What I try instead:
 
 - Add layers of abstraction between components to reduce coupling.
 - Prevent information leakage by encapsulating knowledge of internal variables in their respective classes.
@@ -299,16 +299,16 @@ class DateFormatter:
 
 **4. Knowledge Duplication**
 
-Why it's bad:
+Why I flag it:
 
 - When duplicate knowledge changes, we need to search through all the code to update each duplication.
 - Different instances of duplicate knowledge may be doing different things when they are expected to do the same thing.
 
-How to fix it:
+What I try instead:
 
 - Extract duplicate knowledge into helper functions or classes.
-- Use the helper functions throughout the code, but be sure not to overload them.
-- Avoid extracting similar code that represents different knowledge.
+- I reuse the helper functions throughout the code without overloading their responsibility.
+- Similar-looking code stays separate when it represents different knowledge.
 
 ```ts
 // ❌
@@ -336,12 +336,12 @@ function updateUser(email) {
 
 **5. Alternative Classes with Different Interfaces**
 
-Why it's bad:
+Why I flag it:
 
 - It violates the principle of Abstraction.
 - It easily leads to more code than necessary and duplication of knowledge.
 
-How to fix it:
+What I try instead:
 
 - Standardize abstractions and their respective interfaces.
 - If classes are appropriate subtypes, consider placing functionality in a superclass.
@@ -373,16 +373,16 @@ class DatabaseReader implements IDataReader {
 
 **6. Unclear/Confusing Names**
 
-Why it's bad:
+Why I flag it:
 
 - The code becomes unclear and confusing to understand.
 - It makes it more difficult for others to work with the code.
 
-How to fix it:
+What I try instead:
 
 - Rename the entity so that it is meaningful and represents what it does.
 - If the name becomes too long, it may be a sign that the entity is doing or storing too much information.
-- Avoid using names that reflect the type of variable.
+- I avoid names that only repeat the variable's type.
 
 ```python
 # ❌
@@ -396,12 +396,12 @@ discount_percentage = 25
 
 **7. Primitive Obsession**
 
-Why it's bad:
+Why I flag it:
 
 - Leads to poor encapsulation
 - Can easily lead to duplication of knowledge when dealing with validation and other operations
 
-How to fix it:
+What I try instead:
 
 - Model domain behavior and non-primitive knowledge through custom types
 - Be careful not to overfit types to their use cases (“type explosion”)
@@ -436,13 +436,13 @@ class Money:
 
 **8. Multitaskers / Long Functions**
 
-Why it's bad:
+Why I flag it:
 
 - Multitaskers are harder to understand and change.
 - Pieces of knowledge within multitaskers cannot be reused unless they are extracted.
 - Longer functions are naturally more complex to work with.
 
-How to fix it:
+What I try instead:
 
 - Identify the core purpose of a function/class
 - Everything that does not directly belong to that core purpose should be extracted to other entities
@@ -481,11 +481,11 @@ function processOrder(order) {
 
 **9. Divergent Change**
 
-Why it's bad:
+Why I flag it:
 
 - When an object or class needs to change for more than one reason, it indicates a violation of the Single Responsibility Principle.
 
-How to fix it:
+What I try instead:
 
 - Divide the object or class into multiple entities, each with its own responsibility.
 - Call each of the resulting entities when necessary.
@@ -510,14 +510,14 @@ class ProductFormatter:
 
 **10. Large Interfaces**
 
-Why it's bad:
+Why I flag it:
 
 - Large interfaces are a sign that modules are leaking too much information about their internal structures.
 - It introduces coupling between different parts of the code.
 
-How to fix it:
+What I try instead:
 
-- Avoid exposing low-level details to the outside world.
+- I keep low-level details behind the interface boundary.
 - Split interfaces that have more than one responsibility.
 - When defining the boundaries of an interface, focus on behavior and domain knowledge.
 
@@ -553,16 +553,16 @@ interface INotification {
 
 **11. Long Parameter List**
 
-Why it's bad:
+Why I flag it:
 
 - Long lists of parameters are harder to maintain.
 - If we pass parameters in the wrong order, we can break the function.
 
-How to fix it:
+What I try instead:
 
 - Replace data parameters with a single data object.
 - If information can be obtained from another parameter, remove the additional parameter
-- Avoid passing flag parameters
+- I avoid flag parameters because they usually hide multiple behaviors
 
 ```python
 # ❌
@@ -584,16 +584,16 @@ def create_user(user_data: UserData):
 
 **12. Mutable Data**
 
-Why it's bad:
+Why I flag it:
 
 - Updating data used by other parts of the code can introduce bugs and side effects.
 - Mutable data creates hidden dependencies and coupling.
 
-How to fix it:
+What I try instead:
 
 - Encapsulate data used by multiple methods with appropriate setter and getter methods.
 - When modifying an object, choose to return a copy of the object with the changes.
-- Avoid modifying function parameters as much as possible.
+- I avoid modifying function parameters when a returned value can make the change explicit.
 
 ```ts
 // ❌
@@ -613,13 +613,13 @@ function applyDiscount(product, discount) {
 
 **13. Middle Man**
 
-Why it's bad:
+Why I flag it:
 
 - This pattern adds virtually no value to the code.
 - It introduces additional sources of coupling.
 - Encapsulation is highly encouraged, but when methods become too superficial, it's a sign of poor structure.
 
-How to fix it:
+What I try instead:
 
 - If there is no additional logic, remove as many intermediaries as possible.
 - Combine methods and simplify the class interface.
@@ -650,11 +650,11 @@ class Department {
 
 **14. Data Clumps**
 
-Why it's bad:
+Why I flag it:
 
 - Typically reflect the internal data structure of objects
 
-How to fix it:
+What I try instead:
 
 - Move related fields to an object or class
 - Refactor method signatures to receive the entire object
@@ -681,15 +681,15 @@ def create_address(address: Address): pass
 
 **15. Repeated Switches**
 
-Why it's bad:
+Why I flag it:
 
 - Duplicates knowledge in the code base
 - It's very easy to forget to add/update conditional clauses when the logic changes
 
-How to fix it:
+What I try instead:
 
 - Encapsulate conditional logic
-- Use polymorphism when relevant and applicable
+- I use polymorphism when it clarifies the varying behavior
 
 ```ts
 // ❌
@@ -728,15 +728,15 @@ class PremiumPlan extends Plan {
 
 **16. Refused Bequest**
 
-Why it's bad:
+Why I flag it:
 
 - It indicates an incorrect inheritance hierarchy.
 - We put too much information in superclasses.
 
-How to fix it:
+What I try instead:
 
 - Remove unnecessary methods from the superclass.
-- Use composition to inject behavior instead of relying too much on inheritance.
+- I prefer composition for injecting behavior instead of relying too heavily on inheritance.
 - If there is interface misalignment, revisit the super-subclass relationship
 
 ```python
@@ -766,12 +766,12 @@ class Eagle(IWalkable, IFlyable):
 
 **17. Speculative Generality**
 
-Why it's bad:
+Why I flag it:
 
 - It leads to code that is more complex than necessary.
 - Unnecessary functionality is wasted time and resources.
 
-How to fix it:
+What I try instead:
 
 - Remove unused code.
 - Keep the code structure simple: avoid over-engineering.
@@ -795,12 +795,12 @@ interface IPayment {
 
 **18. Unnecessary Exceptions**
 
-Why it's bad:
+Why I flag it:
 
 - Exceptions interrupt the normal flow of the program.
 - Boilerplate code for handling exceptions can be painfully long and complicated.
 
-How to fix it:
+What I try instead:
 
 - Add default behaviors or values
 - Mask exceptions by handling them as close as possible to where they are thrown
@@ -822,16 +822,16 @@ def get_user(user_id):
 
 **19. Feature Envy**
 
-Why it's bad:
+Why I flag it:
 
 - Low cohesion leads to high coupling between modules.
 - Low cohesion also indicates that module responsibilities are not well defined.
 - It can be easy to forget to call a certain method or call methods in the wrong order.
 
-How to fix it:
+What I try instead:
 
 - Move the function that continuously interacts with another module to that module
-- Consider improving the system design by better establishing boundaries between domains
+- I revisit the boundaries between domains when the design starts leaking responsibilities
 - Put things that change together
 
 ```ts
@@ -876,12 +876,12 @@ class ShoppingCart {
 
 **20. Shallow Modules**
 
-Why it's bad:
+Why I flag it:
 
 - Shallow modules have a large surface area and little added functionality.
 - More surface area means more places for coupling and less information hiding.
 
-How to fix it:
+What I try instead:
 
 - Aim for deep modules: complex and meaningful features exposed through simple interfaces.
 

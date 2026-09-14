@@ -35,7 +35,7 @@ software-craftsmanship/
 Self-structured reference on CS fundamentals — built from problem-solving, docs, and work experience.
 
 - [`algorithms/`](./notes/algorithms/) — sorting, searching, and graph/tree traversal
-- [`data-structures/`](./notes/data-structures/) — core structures for competitive programming
+- [`data-structures/`](./notes/data-structures/) — notes on representation, operations, and tradeoffs
 - [`patterns/`](./notes/patterns/) — prefix sums, sliding windows, greedy, backtracking, and dynamic programming
 
 ---

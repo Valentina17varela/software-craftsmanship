@@ -4,7 +4,7 @@
 
 ## 📝 Overview
 
-The aim of the course Data Structures and Algorithms is to advance your programming skills and teach you techniques and ways of thinking that help you in implementing programs that are correct and efficient in all circumstances.
+My goal for this part of Data Structures and Algorithms was to strengthen the way I reason about correctness and efficiency, not only to collect implementations.
 
 
 ## 📚  Notes

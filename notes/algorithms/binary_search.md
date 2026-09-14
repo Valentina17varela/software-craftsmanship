@@ -40,11 +40,9 @@ flowchart TD
 | Upper bound | First index with value $>$ target | Position after duplicates |
 | Answer search | Smallest value satisfying a predicate | Minimize a feasible capacity |
 
-## 3. Generic template and common adaptations
+## 3. Reusable templates
 
-### Generic template
-
-This boundary-search base returns the first position where a monotonic condition becomes true.
+### Python: first true boundary
 
 ```python
 from collections.abc import Callable
@@ -59,9 +57,14 @@ def first_true(left: int, right: int, condition: Callable[[int], bool]) -> int:
         else:
             left = middle + 1
     return left
+
+
+numbers = [1, 3, 4, 7, 9, 12, 15]
+index = first_true(0, len(numbers), lambda position: numbers[position] >= 9)
+print(index)  # 4
 ```
 
-### Common adaptation 1: exact search
+### Exact search
 
 ```python
 def binary_search(numbers: list[int], target: int) -> int:
@@ -80,26 +83,6 @@ def binary_search(numbers: list[int], target: int) -> int:
 
 
 print(binary_search([1, 3, 4, 7, 9], 7))  # 3
-```
-
-### Common adaptation 2: first value greater than or equal to target
-
-```python
-def lower_bound(numbers: list[int], target: int) -> int:
-    left, right = 0, len(numbers)
-
-    while left < right:
-        middle = left + (right - left) // 2
-        if numbers[middle] >= target:
-            right = middle
-        else:
-            left = middle + 1
-    return left
-
-
-numbers = [1, 3, 3, 7, 9]
-print(lower_bound(numbers, 3))  # 1
-print(lower_bound(numbers, 8))  # 4
 ```
 
 ## 4. Complexity and recognition

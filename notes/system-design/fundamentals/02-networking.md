@@ -264,4 +264,3 @@ Use HTTP over TCP for the API. For a live feed, start with polling and move to S
 - Hello Interview, [Core Concepts: Networking Essentials](https://www.hellointerview.com/learn/system-design/core-concepts/networking-essentials)
 - Hello Interview, [In a Hurry: Core Concepts](https://www.hellointerview.com/learn/system-design/in-a-hurry/core-concepts)
 - Hello Interview, [Common Patterns: Pushing Realtime Updates](https://www.hellointerview.com/learn/system-design/in-a-hurry/patterns)
-- Personal notes: "networking (layers)"

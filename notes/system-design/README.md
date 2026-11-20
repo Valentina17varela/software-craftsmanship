@@ -1,6 +1,6 @@
 # System Design Notes
 
-Study notes on system design: the principles behind distributed systems, the building blocks that implement them, and the patterns that combine them. The `process/` folder is the exception: it covers interview practice only.
+Study notes on system design: the principles behind distributed systems, the building blocks that implement them, and the patterns that combine them. The interview delivery framework lives in [system-design-interview.md](./system-design-interview.md).
 
 ## Structure
 
@@ -10,7 +10,6 @@ flowchart LR
     B["building-blocks/<br/>Concrete technologies"] --> PT
     PT["patterns/<br/>Reusable combinations of blocks"] --> C
     C["case studies/<br/>Coming later"]
-    P["process/<br/>Interview practice only"] -.-> F
 ```
 
 | Folder | What it answers | Read it when |
@@ -18,9 +17,8 @@ flowchart LR
 | [fundamentals/](./fundamentals/) | Why do systems behave the way they do? (latency, scaling, replication, CAP) | First, before anything else |
 | [building-blocks/](./building-blocks/) | Which tool solves which problem, and at what trade-off? | After the fundamentals |
 | [patterns/](./patterns/) | Which combination of blocks solves a class of problem? | When you recognize a problem type |
-| [process/](./process/) | How to run a timed design interview (interview-specific) | Only when preparing for interviews |
 
-The original summary of the delivery framework is still in [system-design-interview.md](./system-design-interview.md).
+Files in `fundamentals/` have number prefixes because they are meant to be read in order. The other folders have no numbers because their files are independent and can be read in any order.
 
 ## How the concepts connect
 
@@ -35,15 +33,16 @@ flowchart TD
     CAP --> PAT[Patterns]
     CDN --> PAT
     BB[Building blocks: cache, queue, LB, gateway] --> PAT
-    NET[Networking and APIs] --> BB
+    NET[Networking] --> API[API design: contracts, idempotency, pagination]
+    API --> BB
 ```
 
 Read the tree from the top: each layer uses the ideas from the layer above it. For example, the choice of a cache (building block) is justified by latency (fundamental), and "scaling reads" (pattern) combines replicas and caches.
 
 ## Files
 
-### process/
-- [delivery-framework.md](./process/delivery-framework.md): the six steps of the interview, the rubric, and a worked Twitter example.
+### Interview
+- [system-design-interview.md](./system-design-interview.md): the delivery framework, the rubric, and a worked Twitter example.
 
 ### fundamentals/
 - [01-latency-and-geography.md](./fundamentals/01-latency-and-geography.md)

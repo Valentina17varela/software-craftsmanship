@@ -3,11 +3,22 @@ A system design interview is a collaborative, open-ended technical interview whe
 
 Unlike a coding interview—which tests specific algorithms and data structures by writing code—a system design interview evaluates your technical breadth, communication, structured thinking, and decision-making when dealing with ambiguity
 
-![](/notes/system-design/resources/rubric.png)
+![](./resources/rubric.png)
+
+## Rubric: what interviewers grade
+
+| Area | Strong signal | Weak signal (from the rubric example) |
+|---|---|---|
+| **Problem navigation** | Spends time on the hardest part of the problem | Spent all the time on the User table and never touched the most important part |
+| **Solution design** | Elegant solutions to the real bottleneck | A multi-layer cache was an elegant answer to the massive read volume |
+| **Technical excellence** | Command of tools and their internals | Strong command of Redis, Elasticsearch, and inverted indexes |
+| **Communication and collaboration** | Welcomes alternatives and trade-offs | Got defensive when asked about alternative approaches |
+
+Key takeaway: know the tools, but spend your time on the hard part of the problem and stay open to other approaches.
 
 ## Delivery Framework
 
-![](/notes/system-design/resources/delivery.png)
+![](./resources/delivery.png)
 
 1. Requirements: Get a clear understanding of the system that you are being asked to design.
     - Functional requirements:  "Users/Clients should be able to..." statements. Core features of your system.
@@ -65,7 +76,8 @@ Unlike a coding interview—which tests specific algorithms and data structures 
 
 ## Example: Build Twitter
 
-1. Requirements
+### 1. Requirements
+
 Functional:
 - Users should be able to post tweets
 - Users should be able to follow other users
@@ -76,12 +88,12 @@ Non functional:
 - The system should be able to scale to support 100M+ DAU (Daily Active Users)
 - The system should be low latency, rendering feeds in under 200ms
 
-2. Core entities
+### 2. Core entities
 - User
 - Tweet
 - Follow
 
-3. API
+### 3. API
 ```
 POST /v1/tweets
 body: {
@@ -98,18 +110,29 @@ body: {
 GET /v1/feed -> Tweet[]
 ```
 
-4. High level design: one endpoint at a time
-![](/notes/system-design/resources/high_level_design_twitter.png)
+### 4. High level design: one endpoint at a time
+![](./resources/high_level_design_twitter.png)
 
-5. Deep dive: One of our non-functional requirements for Twitter was that our system needs to scale to >100M DAU. We could then lead a discussion oriented around horizontal scaling, the introduction of caches, and database sharding.
+### 5. Deep dive: One of our non-functional requirements for Twitter was that our system needs to scale to >100M DAU. We could then lead a discussion oriented around horizontal scaling, the introduction of caches, and database sharding.
 
-Another was that feeds need to be fetched with low latency. In the case of Twitter, this is actually the most interesting problem. We'd lead a discussion about fanout-on-read vs fanout-on-write and the use of caches.
+Another was that feeds need to be fetched with low latency. In the case of Twitter, this is actually the most interesting problem. We'd lead a discussion about fanout-on-read vs fanout-on-write and the use of caches:
 
-![](/notes/system-design/resources/twitter_design.png)
+- **Fanout-on-read:** build the feed when the user asks. Cheap writes, slow reads for users who follow many accounts.
+- **Fanout-on-write:** when someone tweets, push the tweet into each follower's cached feed. Fast reads, expensive writes for accounts with many followers.
+- **Hybrid:** fanout-on-write for normal accounts, fanout-on-read for celebrities. "What happens when a celebrity with 50M followers tweets?" points to this: fanout-on-write would mean 50M cache updates for one tweet.
 
+![](./resources/twitter_design.png)
+
+## Common mistakes
+
+- Spending most of the time on one table or one service.
+- Drawing a load balancer in front of every component.
+- Proposing sharding or microservices before the numbers justify them.
+- Saying "I'll use a cache" without naming the data structure and the invalidation strategy.
+- Rejecting alternatives instead of comparing them.
 
 ## Resources
 
 - [Delivery Framework by Hello Interview](https://youtu.be/FkLAEAcQXcc?si=THyc3V07zL8142R6)
-- [System design interview by Alex Xu](/notes/system-design/resources/System%20Design%20Interview%20by%20Alex%20Xu.pdf)
-- [Designing Data Intensive Applications by Martin Kleppmann.pdf](/notes/system-design/resources/Designing%20Data%20Intensive%20Applications%20by%20Martin%20Kleppmann.pdf)
+- [System design interview by Alex Xu](./resources/System%20Design%20Interview%20by%20Alex%20Xu.pdf)
+- [Designing Data Intensive Applications by Martin Kleppmann.pdf](./resources/Designing%20Data%20Intensive%20Applications%20by%20Martin%20Kleppmann.pdf)

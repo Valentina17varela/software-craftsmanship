@@ -41,6 +41,16 @@ Transactions are the main ACID feature in practice. Example: create a user and t
 
 ## Data modeling
 
+### Start with three factors
+
+Tie every schema decision to these:
+
+- **Data volume**: how much data exists, and whether it must be split across stores.
+- **Access patterns**: the most important factor. For each endpoint, ask which queries it needs to support.
+- **Consistency requirements**: money and inventory need ACID in one database. Feeds and like counts can be eventually consistent and denormalized.
+
+In an interview, say the reason out loud: "Likes can be eventually consistent, so I'll denormalize the like count into the posts table."
+
 ### Normalization vs denormalization
 
 ```mermaid
@@ -64,6 +74,8 @@ flowchart LR
 
 Default: start normalized. Denormalize specific hot paths when you can point to a read problem. Do not propose denormalization upfront without a reason.
 
+Valid reasons to denormalize: analytics over data that rarely changes, event logs and audit trails (a snapshot at a point in time), and read-heavy data. A common alternative is to keep a normalized source of truth and put a cache such as Redis in front, holding precomputed joins or aggregates.
+
 ### NoSQL data modeling
 
 Design around access patterns. In DynamoDB-style stores, the partition key decides where data lives:
@@ -72,6 +84,13 @@ Design around access patterns. In DynamoDB-style stores, the partition key decid
 - Query "all posts that mention hashtag Y": not supported well. It needs a scan or another table keyed by hashtag.
 
 List the queries first, then design the keys.
+
+### Entities, keys, and constraints
+
+- **Primary keys**: use system-generated IDs (`user_id`, `post_id`), not business data such as email. They stay stable when business rules change.
+- **Relationships**: one-to-many is a foreign key on the many side (`posts.user_id`). Many-to-many (users like posts) needs a join table (`likes(user_id, post_id)`). One-to-one is rare; the two tables are often better merged.
+- **Foreign keys** prevent orphaned rows, but every insert and update pays for the check. At very large scale some companies drop them and enforce integrity in the application. Name this trade-off if you bring up foreign keys.
+- **Constraints** (NOT NULL, UNIQUE, CHECK) enforce rules in the database, such as unique emails or positive prices, at some write cost.
 
 ## Indexes
 
@@ -95,6 +114,15 @@ Tip: list the fields your queries filter on and propose indexes on those. For "f
 
 External search indexes are usually fed from the primary database through **change data capture (CDC)**. They lag slightly behind, which is acceptable for search.
 
+## Sharding for data modeling
+
+For the mechanics, see [scalability](./05-scalability.md). For the schema:
+
+- **Shard by the primary access pattern.** If you mostly query posts by user, shard by `user_id`.
+- **Avoid cross-shard queries.** A timeline that merges posts from many followed users, sharded by `user_id`, has to query many shards.
+- **Avoid time-range shards for write-heavy data.** All current writes hit the newest range, creating a hot shard. Time-range partitioning suits archives and analytics.
+- **The shard key is hard to change.** It affects every query, so decide it early.
+
 ## Blob storage
 
 Do not store large files (images, videos) in a relational database. Store the file in object storage and keep a URL in the database. Details: [blob-storage.md](../building-blocks/blob-storage.md).
@@ -105,6 +133,10 @@ Do not store large files (images, videos) in a relational database. Store the fi
 - Sharding before trying indexes, replicas, and caches.
 - Using a database as a queue or as blob storage.
 - Forgetting that joins become a bottleneck on large tables.
+- Using a business value such as email as the primary key.
+- Denormalizing before finding a read problem.
+- Using time-range sharding for a write-heavy table.
+- Choosing a graph database for relationships a relational database can handle.
 
 ## Example decision
 
@@ -119,6 +151,6 @@ Users and orders need transactions, so use Postgres. Index `user_id` on orders f
 
 ## Sources
 
-- Hello Interview, [Core Concepts: Data Modeling](https://www.hellointerview.com/learn/system-design/in-a-hurry/core-concepts) and [Database Indexing](https://www.hellointerview.com/learn/system-design/in-a-hurry/core-concepts)
+- Hello Interview, [Core Concepts](https://www.hellointerview.com/learn/system-design/in-a-hurry/core-concepts)
+- Hello Interview, [Core Concepts: Data Modeling](https://www.hellointerview.com/learn/system-design/core-concepts/data-modeling)
 - Hello Interview, [Key Technologies: Core Database](https://www.hellointerview.com/learn/system-design/in-a-hurry/key-technologies)
-- Personal notes: "storage (relational, document based, key value, ACID vs BASE)"

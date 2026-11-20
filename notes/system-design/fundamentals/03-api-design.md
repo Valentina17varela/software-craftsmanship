@@ -109,7 +109,7 @@ createBooking(eventId: "123", userId: "456", tickets: [...])
 getAvailableTickets(eventId: "123", section: "VIP")
 ```
 
-** Protocol Buffers and Type Safety **
+**Protocol Buffers and Type Safety**
 gRPC uses Protocol Buffers (protobuf) to define service contracts. You write a .proto file that describes your service methods and data structures. From this single definition, gRPC generates client and server code in multiple programming languages. This means your Go backend service and your Java payment service can communicate with compile-time type safety, catching mismatches before deployment.
 
 ```
@@ -178,7 +178,7 @@ flowchart LR
     EP --> HLD["Build the design<br/>endpoint by endpoint"]
 ```
 
-Example from the Twitter design in [delivery-framework.md](../process/delivery-framework.md):
+Example from the Twitter design in [system-design-interview.md](../system-design-interview.md):
 
 ```
 POST /v1/tweets
@@ -192,7 +192,7 @@ GET  /v1/feed
 ## Related
 
 - [02-networking.md](./02-networking.md)
-- [Delivery framework](../process/delivery-framework.md)
+- [Delivery framework](../system-design-interview.md)
 - [API gateway](../building-blocks/api-gateway.md)
 
 ## Sources
